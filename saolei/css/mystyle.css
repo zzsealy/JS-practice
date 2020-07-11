@@ -1,0 +1,49 @@
+#game-ui{
+    text-align: center;
+}
+
+#saolei {
+    width: 500px;
+    height: 500px;
+    border: 1px solid #000;
+    margin: 0 auto;
+    margin-top: 15%;
+
+}
+
+
+
+#saolei .boom-box {
+    width: 48px;
+    height: 48px;
+    border: 1px solid #000;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+#saolei .boom-box .box-menu { 
+    display: none;
+    width: 50px;
+    list-style: none;
+    font-size: 12px; 
+    padding: 0;
+    margin-top: 4px;
+    position: absolute;
+}
+
+#saolei .boom-box .box-menu .li {
+    border: 1px solid #000;
+    margin-top: 2px;
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+
+}
+
+#saolei .boom-box .box-menu .li.active {
+    background-color: #f00;
+}

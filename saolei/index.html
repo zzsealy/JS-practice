@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>扫雷  -- mkde by zzsealy</title>
+    <link rel="stylesheet" href="css/mystyle.css">
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="game-ui">
+        <div id="saolei">
+            <div v-for="box in boxs" @click="openMenu(box)" class="boom-box">
+                <ul :id = " 'menu' + box " class="box-menu">    <!-- 为每一个盒子都建立一个id -->
+                    <li  @mouseenter="listMove($event)" @mouseleave="listMove($event)" class="li">标记</li>
+                    <li  @mouseenter="listMove($event)" @mouseleave="listMove($event)" class="li">扫雷</li>
+                    <!-- click.stop作用是防止两个点击事件冲突 阻止冒泡事件 -->
+                    <li  @mouseenter="listMove($event) " @mouseleave="listMove($event)" @click.stop="closeMenu(box)"  class="li">取消</li > 
+                </ul>
+            </div>
+        </div>
+        <div id="game-setting">
+            <input v-model="inputNum" type="text" placeholder=" 输入阵列数">  <!-- 双向绑定 -->
+            <button @click="settingGame">确定</button>
+        </div>
+
+    </div>
+    
+
+    <script src="js/script.js"></script>
+</body>
+</html>
