@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <title>组件通信 provide 和 inject</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <Test></Test>
+    </div>
+    <script>
+      function registerPlugin() {
+        Vue.component('Test', {
+          template: '<div>{{message}}<Test2 /></div>',
+          provide() {
+            return {
+              elTest: this  // 将自身打包成elTest 供子组件调用。
+            }
+          }, // function 的用途是为了获取运行时环境，否则 this 将指向 window
+          data() {
+            return {
+              message: 'message from Test'
+            }
+          },
+          methods: {
+            change(component) {
+              this.message = 'message from ' + component
+            }
+          }
+        })
+        Vue.component('Test2', {
+          template: '<Test3 />'
+        })
+        Vue.component('Test3', {
+          template: '<button @click="changeMessage">change</button>',
+          inject: ['elTest'],   // 在这里引入父组件的实例
+          methods: {
+            changeMessage() {
+              this.elTest.change(this.$options._componentTag)  //options._componentTag 指向Test3
+            }
+          }
+        })
+      }
+      Vue.use(registerPlugin)
+      new Vue({
+        el: '#root'
+      })
+    </script>
+  </body>
+</html>
