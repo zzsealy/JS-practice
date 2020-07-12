@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <title>过滤器 filter</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h1 v-if="flag"> {{ message | lower }}  </h1>
+        <h1 v-else>{{ message }} </h1>
+        <button @click="update">{{ butt }}</button>
+    </div>
+    <script>
+        new Vue({
+            el: '#root',
+            filters: {
+                lower(value) {
+                    return value.toLowerCase()
+                }
+            },
+            data() {
+            return {
+                message: 'Hello Vue ADWAW',
+                flag: false,
+                butt: '小写'
+            }
+        },
+        methods: {
+            update() {
+                if(!this.flag) {
+                    this.butt = "大写"
+                } else {
+                    this.butt = "小写"
+                }
+                this.flag = !this.flag
+
+            }
+        }
+      })
+    </script>
+</body>
+
+</html>
