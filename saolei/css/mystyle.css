@@ -24,6 +24,11 @@
 
 }
 
+#saolei .boom-box i{
+    font-size: 30px;
+    color: red;
+}
+
 
 #saolei .boom-box .box-menu { 
     display: none;
