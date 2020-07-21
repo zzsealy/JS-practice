@@ -24,6 +24,9 @@
 #saolei .boom-box.activ {
     background: grey;
 }
+#saolei .boom-box.tip {
+    background: rgb(115,236, 44);
+}
 
 #saolei .boom-box i{
     font-size: 30px;

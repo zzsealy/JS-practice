@@ -14,29 +14,37 @@
     <div id="game-ui">
         <div id="saolei">
             <div :id="'boomBox'+box" v-for="box in boxs" @click="openMenu(box)" class="boom-box">
-                <template v-if="box == boom" v-for="boom in booms">  <!-- 如果box和boom 相等的话， 代表这个格子有雷。-->
-                    <i :id="'flag'+box" class="iconfont icon-qizi" style="display:none"></i> <!-- 旗子默认不显示 -->
-                    <i class="iconfont icon-boom" style="display:block"></i> <!-- 炸弹 -->
-                    <ul :id=" 'menu' + box " class="box-menu">
-                        <!-- 为每一个盒子都建立一个id -->
-                        <li @mouseenter="listMove($event)" @mouseleave="listMove($event)"
-                            @click.stop="markBox(box, $event)" class="li">标记</li>
-                        <li @mouseenter="listMove($event)" @mouseleave="listMove($event)" @click.stop="standBox(box)" class="li">扫雷</li>
-                        <!-- click.stop作用是防止两个点击事件冲突 阻止冒泡事件 -->
-                        <li @mouseenter="listMove($event) " @mouseleave="listMove($event)" @click.stop="closeMenu(box)"
-                            class="li">取消</li>
-                    </ul>
-                </template>
-                <template v-else>
-                    <span :id="'around'+box"></span>
-                    <i :id="'flag'+box" class="iconfont icon-qizi" style="display:none"></i>  <!-- 旗子默认不显示 -->
-                    <ul :id = " 'menu' + box " class="box-menu">    <!-- 为每一个盒子都建立一个id -->
-                    <li  @mouseenter="listMove($event)" @mouseleave="listMove($event)" @click.stop="markBox(box, $event)" class="li">标记</li>
-                    <li  @mouseenter="listMove($event)" @mouseleave="listMove($event)" @click.stop="standBox(box)" class="li">扫雷</li>
-                    <!-- click.stop作用是防止两个点击事件冲突 阻止冒泡事件 -->
-                    <li  @mouseenter="listMove($event) " @mouseleave="listMove($event)" @click.stop="closeMenu(box)"  class="li">取消</li > 
-                </ul>
-                </template>
+                <div v-for="boom in booms" @click="abc(box,boom)">
+                    <template v-if="box == boom">
+                        <!-- 如果box和boom 相等的话， 代表这个格子有雷。-->
+                        <i :id="'flag'+box" class="iconfont icon-qizi" style="display:none"></i> <!-- 旗子默认不显示 -->
+                        <i :id="'boom'+ box" class="iconfont icon-boom" style="display:block"></i> <!-- 炸弹 -->
+                        <ul :id=" 'menu' + box " class="box-menu">
+                            <!-- 为每一个盒子都建立一个id -->
+                            <li @mouseenter="listMove($event)" @mouseleave="listMove($event)"
+                                @click.stop="markBox(box, $event)" class="li">标记</li>
+                            <li @mouseenter="listMove($event)" @mouseleave="listMove($event)"
+                                @click.stop="standBox(box, boom)" class="li">扫雷</li>
+                            <!-- click.stop作用是防止两个点击事件冲突 阻止冒泡事件 -->
+                            <li @mouseenter="listMove($event) " @mouseleave="listMove($event)"
+                                @click.stop="closeMenu(box)" class="li">取消</li>
+                        </ul>
+                    </template>
+                    <template v-else>
+                        <span :id="'around'+box" style="display: none;"></span>
+                        <i :id="'flag'+box" class="iconfont icon-qizi" style="display:none"></i> <!-- 旗子默认不显示 -->
+                        <ul :id=" 'menu' + box " class="box-menu">
+                            <!-- 为每一个盒子都建立一个id -->
+                            <li @mouseenter="listMove($event)" @mouseleave="listMove($event)"
+                                @click.stop="markBox(box, $event)" class="li">标记</li>
+                            <li @mouseenter="listMove($event)" @mouseleave="listMove($event)"
+                                @click.stop="standBox(box, boom)" class="li">扫雷</li>
+                            <!-- click.stop作用是防止两个点击事件冲突 阻止冒泡事件 -->
+                            <li @mouseenter="listMove($event) " @mouseleave="listMove($event)"
+                                @click.stop="closeMenu(box)" class="li">取消</li>
+                        </ul>
+                    </template>
+                </div>
             </div>
         </div>
         <div id="game-setting">

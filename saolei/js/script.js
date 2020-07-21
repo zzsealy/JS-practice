@@ -3,18 +3,65 @@ new Vue ({
     data: {
         boxs: 0,
         inputNum: "10",
-        boomNum:20,
-        booms:[] // 把20个雷选出来放进去
+        boomNum: 5,
+        booms: [] // 放雷的列表
     },
     methods: {
+        abc(box,boom) {
+            console.log(box,boom)
+        },
         // 点击扫雷
-        standBox(box) {
+        standBox(box,boom) {
             this.closeMenu(box) // 隐藏菜单。
-            var boomBoxDom = document.getElementById("boomBox"+box)
+            console.log("box:", box, "boom:", boom)
+            if (box == boom) {
+                console.log("点击了炸弹")
+                var boomDom = document.getElementById("boom"+box)
+                boomDom.style.display = "block"
+            }
+            var boomBoxDom = document.getElementById("boomBox"+box) // 炸弹
             boomBoxDom.className = "boom-box activ"
+            // 检查周围是否为0
+            this.checkBox(box)
+        },
+
+        checkBox(box) {
+            var aroundDom = document.getElementById('around'+box)
+            var boomBoxDom = document.getElementById("boomBox"+box)
+            // 判断当前选择的是否为0 （为0代表周围八个相邻的区域没有雷
+            if(aroundDom.innerHTML == '0') {
+                // console.log("继续巡查")
+                aroundDom.innerHTML = '-1'
+                boomBoxDom.className = "boom-box activ"
+                aroundDom.style.display = "none"
+
+                // 左边
+                var box_left = box - 1
+                if(this.lastNum(box_left) >= 1) {
+                    this.checkBox(box_left)
+                }
+                // 右边
+                var box_right = box + 1
+                if(this.lastNum(box_right) != 1) {
+                    this.checkBox(box_right)
+                }
+                // 上边
+                var box_top = box - 10
+                if(box_top > 0) {
+                    this.checkBox(box_top)
+                }
+                // 下边
+                var box_bottom = box + 10
+                if(box_bottom <= this.boxs) {
+                    this.checkBox(box_bottom)
+                }
+            } else if(aroundDom.innerHTML !='-1') {
+                aroundDom.style.display = 'block'
+                boomBoxDom.className = "boom-box tip"
+            }
         },
         boomLoop(box) {
-            console.log(box)
+            // console.log(box)
             var has_boom = 0  // 点击的一个盒子周围八个相邻的方向炸弹的总数。
             // 左边
             var box_left = box - 1
@@ -90,12 +137,13 @@ new Vue ({
         settingGame() {
             this.boxs = parseInt(this.inputNum) * parseInt(this.inputNum)
             for (let i = 0; i < this.boomNum; i++) {
-                this.addBoom()
+                this.addBoom() // 添加炸弹
             }
             console.log(this.booms)
+            // console.log(this.booms)
         },
         addBoom() {
-            var num = this.randomNum()
+            var num = parseInt(this.randomNum())
             if (this.booms.indexOf(num) == -1 ) {
                 this.booms.push(num)
             } else {
