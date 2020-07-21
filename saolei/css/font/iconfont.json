@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "6940745",
+      "name": "boom",
+      "font_class": "boom",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
+    },
+    {
       "icon_id": "12929949",
       "name": "旗子",
       "font_class": "qizi",
