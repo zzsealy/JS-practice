@@ -11,8 +11,6 @@
 
 }
 
-
-
 #saolei .boom-box {
     width: 48px;
     height: 48px;
@@ -21,7 +19,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
 
+#saolei .boom-box.activ {
+    background: grey;
 }
 
 #saolei .boom-box i{
